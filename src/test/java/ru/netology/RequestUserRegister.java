@@ -1,12 +1,13 @@
 package ru.netology;
 
 import lombok.Data;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
 public class RequestUserRegister {
-    private final String login;
-    private final String password;
-    private final String status;
+    @NonNull private String login;
+    @NonNull private String password;
+    @NonNull private String status;
 }

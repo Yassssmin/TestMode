@@ -1,5 +1,6 @@
 package ru.netology;
 
+import Data.DataGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,11 +11,9 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class UserFormTest {
-    private DataGenerator dataGenerator;
 
     @BeforeEach
     void setUpAll() {
-        dataGenerator = new DataGenerator();
 
         openSite();
     }
@@ -40,9 +39,9 @@ public class UserFormTest {
 
     @Test
     void shouldLoginWithInvalidLogin() {
-        RequestUserRegister userRegister = DataGenerator.UserRequest.generateActiveUser("ru");
+        RequestUserRegister userRegister = DataGenerator.UserRequest.generateActiveUserLoginInvalid("ru");
 
-        $("input[name='login']").setValue("xn--80aaf7bfd.ru");
+        $("input[name='login']").setValue(userRegister.getLogin());
         $("input[type='password']").setValue(userRegister.getPassword());
         $("[data-test-id=action-login]").click();
 
@@ -53,10 +52,10 @@ public class UserFormTest {
 
     @Test
     void shouldLoginWithInvalidPassword() {
-        RequestUserRegister userRegister = DataGenerator.UserRequest.generateActiveUser("ru");
+        RequestUserRegister userRegister = DataGenerator.UserRequest.generateActiveUserPasswordInvalid("ru");
 
         $("input[name='login']").setValue(userRegister.getLogin());
-        $("input[type='password']").setValue("d8ylqozbi34");
+        $("input[type='password']").setValue(userRegister.getPassword());
         $("[data-test-id=action-login]").click();
 
         // Error
@@ -79,9 +78,9 @@ public class UserFormTest {
 
     @Test
     void shouldNotLoginWithInvalidLogin() {
-        RequestUserRegister userRegister = DataGenerator.UserRequest.generateBlockedUser("ru");
+        RequestUserRegister userRegister = DataGenerator.UserRequest.generateBlockedUserLoginInvalid("ru");
 
-        $("input[name='login']").setValue("xn--80aaf7bfd.ru");
+        $("input[name='login']").setValue(userRegister.getLogin());
         $("input[type='password']").setValue(userRegister.getPassword());
         $("[data-test-id=action-login]").click();
 
@@ -92,23 +91,10 @@ public class UserFormTest {
 
     @Test
     void shouldNotLoginWithInvalidPassword() {
-        RequestUserRegister userRegister = DataGenerator.UserRequest.generateBlockedUser("ru");
+        RequestUserRegister userRegister = DataGenerator.UserRequest.generateBlockedUserPasswordInvalid("ru");
 
         $("input[name='login']").setValue(userRegister.getLogin());
-        $("input[type='password']").setValue("d8ylqozbi34");
-        $("[data-test-id=action-login]").click();
-
-        // Error
-        $(".notification__title").shouldHave(text("Ошибка"));
-        $(".notification__content").shouldHave(text("Ошибка! Неверно указан логин или пароль"));
-    }
-
-    @Test
-    void shouldNotLoginWithInvalidPasswordAndLogin() {
-        RequestUserRegister userRegister = DataGenerator.UserRequest.generateBlockedUser("ru");
-
-        $("input[name='login']").setValue("xn--80aaf7b45fd.ru");
-        $("input[type='password']").setValue("d8ylqozbi34");
+        $("input[type='password']").setValue(userRegister.getPassword());
         $("[data-test-id=action-login]").click();
 
         // Error
