@@ -1,8 +1,9 @@
-package ru.netology;
+package ru.netology.test;
 
-import Data.DataGenerator;
+import ru.netology.Data.DataGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.netology.Data.RequestUserRegister;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -14,7 +15,6 @@ public class UserFormTest {
 
     @BeforeEach
     void setUpAll() {
-
         openSite();
     }
 

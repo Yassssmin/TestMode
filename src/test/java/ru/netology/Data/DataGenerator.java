@@ -1,11 +1,10 @@
-package Data;
+package ru.netology.Data;
 
 import com.github.javafaker.Faker;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import ru.netology.RequestUserRegister;
 
 import java.util.Locale;
 
@@ -67,65 +66,89 @@ public class DataGenerator {
         public static RequestUserRegister generateActiveUserLoginInvalid(String locale) {
             Faker faker = new Faker(new Locale(locale));
 
+            String password = faker.internet().password();
+
             RequestUserRegister userRegisterRequest = new RequestUserRegister(
                     faker.internet().emailAddress(),
-                    faker.internet().password(),
+                    password,
                     "active"
             );
 
             sendRegisterRequest(userRegisterRequest);
 
-            userRegisterRequest.setLogin(faker.internet().emailAddress());
+            RequestUserRegister userRegisterRequestInvalid = new RequestUserRegister(
+                    faker.internet().emailAddress(),
+                    password,
+                    "active"
+            );
 
-            return userRegisterRequest;
+            return userRegisterRequestInvalid;
         }
 
         public static RequestUserRegister generateActiveUserPasswordInvalid(String locale) {
             Faker faker = new Faker(new Locale(locale));
 
+            String emailAddress = faker.internet().emailAddress();
+
             RequestUserRegister userRegisterRequest = new RequestUserRegister(
-                    faker.internet().emailAddress(),
+                    emailAddress,
                     faker.internet().password(),
                     "active"
             );
 
             sendRegisterRequest(userRegisterRequest);
 
-            userRegisterRequest.setPassword(faker.internet().password());
+            RequestUserRegister userRegisterRequestInvalid = new RequestUserRegister(
+                    emailAddress,
+                    faker.internet().password(),
+                    "active"
+            );
 
-            return userRegisterRequest;
+            return userRegisterRequestInvalid;
         }
 
         public static RequestUserRegister generateBlockedUserLoginInvalid(String locale) {
             Faker faker = new Faker(new Locale(locale));
 
+            String password = faker.internet().password();
+
             RequestUserRegister userRegisterRequest = new RequestUserRegister(
                     faker.internet().emailAddress(),
-                    faker.internet().password(),
+                    password,
                     "blocked"
             );
 
             sendRegisterRequest(userRegisterRequest);
 
-            userRegisterRequest.setLogin(faker.internet().emailAddress());
+            RequestUserRegister userRegisterRequestInvalid = new RequestUserRegister(
+                    faker.internet().emailAddress(),
+                    password,
+                    "blocked"
+            );
 
-            return userRegisterRequest;
+            return userRegisterRequestInvalid;
         }
 
         public static RequestUserRegister generateBlockedUserPasswordInvalid(String locale) {
             Faker faker = new Faker(new Locale(locale));
 
+            String emailAddress = faker.internet().emailAddress();
+
             RequestUserRegister userRegisterRequest = new RequestUserRegister(
-                    faker.internet().emailAddress(),
+                    emailAddress,
                     faker.internet().password(),
                     "blocked"
             );
 
             sendRegisterRequest(userRegisterRequest);
 
-            userRegisterRequest.setPassword(faker.internet().password());
+            RequestUserRegister userRegisterRequestInvalid = new RequestUserRegister(
+                    emailAddress,
+                    faker.internet().password(),
+                    "blocked"
+            );
 
-            return userRegisterRequest;
+            return userRegisterRequestInvalid;
         }
     }
 }
