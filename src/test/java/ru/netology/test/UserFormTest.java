@@ -1,9 +1,9 @@
 package ru.netology.test;
 
-import ru.netology.Data.DataGenerator;
+import ru.netology.data.DataGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.netology.Data.RequestUserRegister;
+import ru.netology.data.RequestUserRegister;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static com.codeborne.selenide.Selenide.$;
